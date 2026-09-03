@@ -1,5 +1,37 @@
+# =========================
+# Node.js
+# =========================
+
 node_modules/
+
+
+# =========================
+# Cypress
+# =========================
+
 cypress/reports/
 cypress/videos/
 cypress/screenshots/
+
+# Environment / credentials
 cypress.env.json
+
+
+# =========================
+# Playwright
+# =========================
+
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+playwright/.auth/
+
+
+# =========================
+# Environment variables
+# =========================
+
+.env
+.env.*
+!.env.example
