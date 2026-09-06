@@ -15,7 +15,7 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
 
   // Retry apenas no CI
-  retries: process.env.CI ? 2 : 0,
+  retries: process.env.CI ? 1 : 0,
 
   // Um worker no CI; local usa o padrão
   workers: process.env.CI ? 1 : undefined,
@@ -27,6 +27,11 @@ export default defineConfig({
   use: {
     // URL base do projeto
     baseURL: 'https://automationexercise.com',
+
+    // Deixa a execução mais lenta para acompanhamento visual
+    launchOptions: {
+      slowMo: 1000,
+    },
 
     // Coleta trace quando houver retry
     trace: 'on-first-retry',

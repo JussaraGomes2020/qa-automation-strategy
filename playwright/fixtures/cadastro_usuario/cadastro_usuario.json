@@ -1,0 +1,33 @@
+{
+  "usuario": {
+    "tratamento": "Mrs",
+    "nome": "Jussara Gomes",
+    "email": "",
+    "senha": "teste123",
+
+    "dataNascimento": {
+      "dia": "30",
+      "mes": "03",
+      "ano": "1990"
+    },
+
+    "newsletter": true,
+    "ofertasEspeciais": true,
+
+    "dadosPessoais": {
+      "primeiroNome": "Jussara",
+      "ultimoNome": "Gomes",
+      "empresa": "OpenAI"
+    },
+
+    "endereco": {
+      "logradouro": "Rua 1, Ap A2",
+      "pais": "United States",
+      "estado": "NY",
+      "cidade": "New York",
+      "cep": "0494260"
+    },
+
+    "telefone": "11953849813"
+  }
+}
