@@ -1,14 +1,10 @@
-// @ts-check
 import { defineConfig, devices } from '@playwright/test';
 
-/**
- * @see https://playwright.dev/docs/test-configuration
- */
 export default defineConfig({
   // Diretório dos testes
   testDir: './playwright/tests',
 
-  // Executa os testes em paralelo
+  // Execução em paralelo
   fullyParallel: true,
 
   // Impede test.only no CI
@@ -20,27 +16,39 @@ export default defineConfig({
   // Um worker no CI; local usa o padrão
   workers: process.env.CI ? 1 : undefined,
 
+  // Diretório das evidências
+  outputDir: './evidencias/playwright',
+
   // Relatório HTML
   reporter: 'html',
 
   // Configurações compartilhadas
   use: {
-    // URL base do projeto
+    // URL base
     baseURL: 'https://automationexercise.com',
 
-    // Deixa a execução mais lenta para acompanhamento visual
+    // Localização do navegador
+    locale: 'pt-BR',
+
+    // Screenshot de cada teste
+    screenshot: 'on',
+
+    // Vídeo somente em caso de falha
+    video: 'retain-on-failure',
+
+    // Trace somente em caso de falha
+    trace: 'retain-on-failure',
+
+    // Execução lenta para acompanhamento visual
     launchOptions: {
       slowMo: 1000,
     },
 
-    // Coleta trace quando houver retry
-    trace: 'on-first-retry',
-
-    // Browser principal
+    // Browser
     ...devices['Desktop Chrome'],
   },
 
-  // Browser utilizado nos testes
+  // Browser utilizado
   projects: [
     {
       name: 'chromium',

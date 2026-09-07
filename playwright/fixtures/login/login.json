@@ -1,10 +1,14 @@
 {
   "usuarioValido": {
-    "email": "sara.gomes30.sg+2@gmail.com",
+    "email": "jagqualityassurance+22@gmail.com",
     "senha": "teste123"
   },
-  "usuarioInvalido": {
-    "email": "usuario@teste.com",
-    "senha": "errada123"
-  }
+  "senhaInvalida": "senha_invalida",
+  "emailNaoCadastrado": "jagengenehiroe@gmail.com",
+  "emailFormatoInvalido": "jagqualityassurancegmail.com"
 }
+
+
+
+
+
