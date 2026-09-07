@@ -51,7 +51,7 @@ module.exports = defineConfig({
 
   reporterOptions: {
     reportDir: "cypress/reports",
-    overwrite: false,
+    overwrite: true,
     charts: true,
     reportPageTitle: "Relatório de Automação",
     embeddedScreenshots: true,

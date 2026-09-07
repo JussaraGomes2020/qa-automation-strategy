@@ -13,8 +13,8 @@ export default defineConfig({
   // Retry apenas no CI
   retries: process.env.CI ? 1 : 0,
 
-  // Um worker no CI; local usa o padrão
-  workers: process.env.CI ? 1 : undefined,
+  // 1 worker no CI; 3 workers localmente
+  workers: process.env.CI ? 1 : 3,
 
   // Diretório das evidências
   outputDir: './evidencias/playwright',
@@ -38,11 +38,6 @@ export default defineConfig({
 
     // Trace somente em caso de falha
     trace: 'retain-on-failure',
-
-    // Execução lenta para acompanhamento visual
-    launchOptions: {
-      slowMo: 1000,
-    },
 
     // Browser
     ...devices['Desktop Chrome'],

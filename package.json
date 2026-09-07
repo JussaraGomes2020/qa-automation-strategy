@@ -7,9 +7,17 @@
   "scripts": {
     "cy:open": "cypress open",
     "cy:run": "cypress run",
+
     "test": "cypress run",
     "test:web": "cypress run --spec \"cypress/e2e/**/*.feature\"",
-    "test:api": "cypress run --spec \"cypress/e2e/api/**/*.js\""
+    "test:api": "cypress run --spec \"cypress/e2e/api/**/*.js\"",
+
+    "test:cypress": "cypress run",
+    "report:cypress": "start \"\" \".\\cypress\\reports\\index.html\"",
+    "test:cypress:report": "cypress run && start \"\" \".\\cypress\\reports\\index.html\"",
+
+    "test:playwright": "playwright test",
+    "report:playwright": "playwright show-report"
   },
   "keywords": [
     "cypress",
@@ -31,6 +39,9 @@
     "cypress": "^15.19.0",
     "cypress-mochawesome-reporter": "^4.0.2",
     "esbuild": "^0.28.1",
+    "mochawesome": "^8.0.1",
+    "mochawesome-merge": "^5.1.1",
+    "mochawesome-report-generator": "^6.3.2",
     "typescript": "^5.9.3"
   }
 }
