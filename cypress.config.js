@@ -24,10 +24,28 @@ async function setupNodeEvents(on, config) {
     })
   );
 
+  // Configuração do navegador utilizado pelo Cypress
+  on("before:browser:launch", (browser, launchOptions) => {
+    if (browser.family === "chromium" && browser.name !== "electron") {
+      // Define o idioma do Chrome
+      launchOptions.args.push("--lang=pt-BR");
+
+      // Define os idiomas aceitos pelo navegador
+      launchOptions.preferences.default.intl = {
+        accept_languages: "pt-BR,pt,en-US,en",
+      };
+    }
+
+    return launchOptions;
+  });
+
   return config;
 }
 
 module.exports = defineConfig({
+  // Browser
+  defaultBrowser: "chrome",
+
   // Reporter
   reporter: "cypress-mochawesome-reporter",
 
