@@ -34,23 +34,12 @@ jobs:
       - name: Executar testes
         run: npm test
 
-      - name: Publicar relatório Mochawesome
+      - name: Publicar resultados do Cypress
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: Cypress-Mochawesome-Report
-          path: cypress/reports/
-
-      - name: Publicar Screenshots
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: Cypress-Screenshots
-          path: cypress/screenshots/
-
-      - name: Publicar Vídeos
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: Cypress-Videos
-          path: cypress/videos/
+          name: Cypress-Test-Results
+          path: |
+            cypress/reports/
+            cypress/screenshots/
+          retention-days: 30
