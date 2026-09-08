@@ -33,28 +33,24 @@ jobs:
 
       - name: Executar testes
         run: npm test
-        env:
-          CYPRESS_TRELLO_KEY: ${{ secrets.TRELLO_KEY }}
-          CYPRESS_TRELLO_TOKEN: ${{ secrets.TRELLO_TOKEN }}
-          CYPRESS_TRELLO_ACTION_ID: ${{ secrets.TRELLO_ACTION_ID }}
 
       - name: Publicar relatório Mochawesome
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: Mochawesome-Report
-          path: mochawesome-report/
+          name: Cypress-Mochawesome-Report
+          path: cypress/reports/
 
       - name: Publicar Screenshots
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: Screenshots
+          name: Cypress-Screenshots
           path: cypress/screenshots/
 
       - name: Publicar Vídeos
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: Videos
+          name: Cypress-Videos
           path: cypress/videos/
