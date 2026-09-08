@@ -68,9 +68,10 @@ module.exports = defineConfig({
   e2e: {
     baseUrl: "https://automationexercise.com",
 
-    specPattern: [
-      "cypress/e2e/**/*.feature",
-      "cypress/e2e/**/*.cy.js",
+   specPattern: [
+  "cypress/e2e/**/*.feature",
+  "cypress/e2e/**/*.cy.js",
+  "cypress/api/**/*.cy.js",
     ],
 
     supportFile: "cypress/support/e2e.js",

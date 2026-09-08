@@ -1,6 +1,6 @@
 import { test } from '@playwright/test';
-import LoginPage from '../pages/LoginPage';
-import loginData from '../fixtures/login/login.json';
+import LoginPage from '../../pages/LoginPage';
+import loginData from '../../fixtures/login/login.json';
 
 test.describe('Login', () => {
 
@@ -11,7 +11,6 @@ test.describe('Login', () => {
 
     await loginPage.acessarTelaLogin();
   });
-
 
   // =========================
   // Login realizado com sucesso
@@ -34,7 +33,6 @@ test.describe('Login', () => {
     await loginPage.validarUsuarioAutenticado();
   });
 
-
   // =========================
   // Login com senha inválida
   // =========================
@@ -55,7 +53,6 @@ test.describe('Login', () => {
 
     await loginPage.validarMensagemLoginInvalido();
   });
-
 
   // =========================
   // Login com e-mail não cadastrado
@@ -78,7 +75,6 @@ test.describe('Login', () => {
     await loginPage.validarMensagemLoginInvalido();
   });
 
-
   // =========================
   // Login sem informar o e-mail
   // =========================
@@ -97,7 +93,6 @@ test.describe('Login', () => {
 
     await loginPage.validarFormularioNaoEnviado();
   });
-
 
   // =========================
   // Login sem informar a senha
@@ -119,7 +114,6 @@ test.describe('Login', () => {
 
     await loginPage.validarFormularioNaoEnviado();
   });
-
 
   // =========================
   // Login com e-mail em formato inválido
@@ -143,7 +137,6 @@ test.describe('Login', () => {
 
     await loginPage.validarMensagemEmailInvalido();
   });
-
 
   // =========================
   // Logout do usuário autenticado

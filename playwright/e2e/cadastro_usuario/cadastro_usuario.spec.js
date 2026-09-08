@@ -1,8 +1,8 @@
 import { test } from '@playwright/test';
-import CadastroUsuarioPage from '../pages/CadastroUsuarioPage';
-import { gerarEmail } from '../fixtures/data/UsuarioFactory';
+import CadastroUsuarioPage from '../../pages/cadastro_usuario/Cadastro_UsuarioPage';
+import { gerarEmail } from '../../fixtures/data/UsuarioFactory';
 
-const cadastroData = require('../fixtures/cadastro_usuario/cadastro_usuario.json');
+const cadastroData = require('../../fixtures/cadastro_usuario/cadastro_usuario.json');
 
 test.describe('Cadastro de usuário', () => {
 
@@ -12,13 +12,23 @@ test.describe('Cadastro de usuário', () => {
     await cadastroUsuarioPage.acessarTelaCadastro();
   });
 
+  // =========================
+  // Acessar Login e Cadastro
+  // =========================
+
   test('Acessar a tela de Login e Cadastro', async ({ page }) => {
+
     const cadastroUsuarioPage = new CadastroUsuarioPage(page);
 
     await cadastroUsuarioPage.validarTelaLoginCadastro();
   });
 
+  // =========================
+  // Iniciar cadastro
+  // =========================
+
   test('Iniciar o cadastro de um novo usuário', async ({ page }) => {
+
     const cadastroUsuarioPage = new CadastroUsuarioPage(page);
 
     const usuario = {
@@ -36,7 +46,12 @@ test.describe('Cadastro de usuário', () => {
     await cadastroUsuarioPage.validarTelaCriacaoConta();
   });
 
+  // =========================
+  // Cadastro realizado com sucesso
+  // =========================
+
   test('Cadastrar um novo usuário com sucesso', async ({ page }) => {
+
     const cadastroUsuarioPage = new CadastroUsuarioPage(page);
 
     const usuario = {

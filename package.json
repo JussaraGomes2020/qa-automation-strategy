@@ -10,7 +10,7 @@
 
     "test": "cypress run",
     "test:web": "cypress run --spec \"cypress/e2e/**/*.feature\"",
-    "test:api": "cypress run --spec \"cypress/e2e/api/**/*.js\"",
+    "test:api": "cypress run --spec \"cypress/api/**/*.cy.js\"",
 
     "test:cypress": "cypress run",
     "report:cypress": "start \"\" \".\\cypress\\reports\\index.html\"",

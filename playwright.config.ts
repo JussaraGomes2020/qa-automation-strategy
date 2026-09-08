@@ -2,7 +2,7 @@ import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   // Diretório dos testes
-  testDir: './playwright/tests',
+  testDir: './playwright/',
 
   // Execução em paralelo
   fullyParallel: true,
@@ -14,7 +14,7 @@ export default defineConfig({
   retries: process.env.CI ? 1 : 0,
 
   // 1 worker no CI; 3 workers localmente
-  workers: process.env.CI ? 1 : 3,
+  workers: process.env.CI ? 1 : 1,
 
   // Diretório das evidências
   outputDir: './evidencias/playwright',

@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 
-class CadastroUsuarioPage {
+class Cadastro_UsuarioPage {
 
   constructor(page) {
     this.page = page;
@@ -188,4 +188,4 @@ class CadastroUsuarioPage {
   }
 }
 
-export default CadastroUsuarioPage;
+export default Cadastro_UsuarioPage;
