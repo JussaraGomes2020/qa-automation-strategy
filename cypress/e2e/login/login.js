@@ -120,8 +120,8 @@ Then(
   }
 );
 
-Then("deverá exibir a mensagem Preencha este campo.", () => {
-  LoginPage.validarMensagemCampoObrigatorio();
+Then("o campo senha deverá indicar que é obrigatório", () => {
+  LoginPage.validarCampoSenhaObrigatorio();
 });
 
 
@@ -137,12 +137,9 @@ Then("o campo email deverá ser identificado como inválido", () => {
   LoginPage.validarEmailInvalido();
 });
 
-Then(
-  'deverá exibir a mensagem Inclua um @ no endereço de e-mail "sara.gomes30.sggmail.com" está com um @ faltando.',
-  () => {
-    LoginPage.validarMensagemEmailInvalido();
-  }
-);
+Then("o campo email deverá rejeitar o formato informado", () => {
+  LoginPage.validarCampoEmailInvalido();
+});
 
 
 // =========================

@@ -15,7 +15,7 @@ Feature: Login
     And preencho o campo senha com uma senha inválida
     And clico em conectar-se
     Then o sistema deverá impedir o acesso
-    And deverá exibir a mensagem Seu e-mail ou senha estão incorretos! 
+    And deverá exibir a mensagem Seu e-mail ou senha estão incorretos!
 
   Scenario: Login com e-mail não cadastrado
     When preencho o campo email com um e-mail não cadastrado
@@ -36,7 +36,7 @@ Feature: Login
     And não preencho o campo senha
     And clico em conectar-se
     Then o sistema deverá identificar o campo senha como obrigatório
-    And deverá exibir a mensagem Preencha este campo.
+    And o campo senha deverá indicar que é obrigatório
     And o acesso não deverá ser realizado
 
   Scenario: Login com e-mail em formato inválido
@@ -45,9 +45,9 @@ Feature: Login
     And clico em conectar-se
     Then o sistema deverá impedir o envio do formulário
     And o campo email deverá ser identificado como inválido
-    And deverá exibir a mensagem Inclua um @ no endereço de e-mail "sara.gomes30.sggmail.com" está com um @ faltando.
+    And o campo email deverá rejeitar o formato informado
 
-Scenario: Logout do usuário autenticado
+  Scenario: Logout do usuário autenticado
     Given que estou autenticado
     When clico em sair
     Then o sistema deverá encerrar a sessão

@@ -20,7 +20,6 @@ class LoginPage extends BasePage {
 
     mensagemUsuarioLogado = "Logged in as";
     mensagemLoginInvalido = "Your email or password is incorrect!";
-    mensagemCampoObrigatorio = "Preencha este campo.";
 
 
     // =========================
@@ -111,11 +110,11 @@ class LoginPage extends BasePage {
             .should("have.attr", "required");
     }
 
-    validarMensagemCampoObrigatorio() {
+    validarCampoSenhaObrigatorio() {
         cy.get(this.campoSenha)
             .then(($campo) => {
-                expect($campo[0].validationMessage)
-                    .to.equal(this.mensagemCampoObrigatorio);
+                expect($campo[0].validity.valueMissing)
+                    .to.be.true;
             });
     }
 
@@ -137,19 +136,11 @@ class LoginPage extends BasePage {
             });
     }
 
-    validarMensagemEmailInvalido() {
+    validarCampoEmailInvalido() {
         cy.get(this.campoEmail)
             .then(($campo) => {
-                const mensagemAtual = $campo[0].validationMessage;
-
-                expect(mensagemAtual)
-                    .to.contain('Inclua um "@" no endereço de e-mail.');
-
-                expect(mensagemAtual)
-                    .to.contain("jagqualityassurancegmail.com");
-
-                expect(mensagemAtual)
-                    .to.contain('está com um "@" faltando.');
+                expect($campo[0].validity.typeMismatch)
+                    .to.be.true;
             });
     }
 
