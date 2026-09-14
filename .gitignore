@@ -46,3 +46,9 @@ blob-report/
 playwright/.cache/
 playwright/.auth/
 evidencias/playwright/
+
+# =========================
+# Maven / Java
+# =========================
+
+target/

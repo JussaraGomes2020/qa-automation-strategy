@@ -4,11 +4,6 @@
     "senha": "teste123"
   },
   "senhaInvalida": "senha_invalida",
-  "emailNaoCadastrado": "emailnaocadastrado@gmail.com",
+  "emailNaoCadastrado": "emailnaonaocadastrado@gmail.com",
   "emailFormatoInvalido": "jagqualityassurancegmail.com"
 }
-
-
-
-
-

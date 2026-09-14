@@ -1,0 +1,13 @@
+{
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.configuration.updateBuildConfiguration": "interactive",
+
+    "cucumberautocomplete.steps": [
+        "cypress/e2e/login/login.js"
+    ],
+
+   "cucumberautocomplete.syncfeatures": "cypress/e2e/login/*.feature",
+
+    "cucumberautocomplete.strictGherkinCompletion": true,
+    "cucumberautocomplete.strictGherkinValidation": true
+}
