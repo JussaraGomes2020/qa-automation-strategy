@@ -1,8 +1,8 @@
 package login;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -12,9 +12,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.nio.file.Path;
 
-import static org.testng.Assert.assertEquals;
-
 import pages.login.LoginPage;
+
+import static org.testng.Assert.assertEquals;
 
 public class LoginTest {
 
@@ -31,8 +31,17 @@ public class LoginTest {
                 Path.of("src/test/java/fixtures/login/login.json").toFile()
         );
 
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+
+        options.addArguments("--headless=new");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--window-size=1920,1080");
+
+        driver = new ChromeDriver(options);
+
         driver.manage().window().maximize();
+
         driver.get("https://automationexercise.com/");
 
         loginPage = new LoginPage(driver);
@@ -49,20 +58,14 @@ public class LoginTest {
                 "Automation Exercise"
         );
 
-        driver.findElement(
-                By.cssSelector("a[href='/login']")
-        ).click();
+        loginPage.acessarTelaLogin();
 
         loginPage.preencherEmail(
-                dados.get("usuarioValido")
-                     .get("email")
-                     .asText()
+                System.getenv("TEST_EMAIL")
         );
 
         loginPage.preencherSenha(
-                dados.get("usuarioValido")
-                     .get("senha")
-                     .asText()
+                System.getenv("TEST_PASSWORD")
         );
 
         loginPage.clicarLogin();
@@ -81,19 +84,14 @@ public class LoginTest {
                 "Automation Exercise"
         );
 
-        driver.findElement(
-                By.cssSelector("a[href='/login']")
-        ).click();
+        loginPage.acessarTelaLogin();
 
         loginPage.preencherEmail(
-                dados.get("usuarioValido")
-                     .get("email")
-                     .asText()
+                System.getenv("TEST_EMAIL")
         );
 
         loginPage.preencherSenha(
-                dados.get("senhaInvalida")
-                     .asText()
+                dados.get("senhaInvalida").asText()
         );
 
         loginPage.clicarLogin();
@@ -112,19 +110,14 @@ public class LoginTest {
                 "Automation Exercise"
         );
 
-        driver.findElement(
-                By.cssSelector("a[href='/login']")
-        ).click();
+        loginPage.acessarTelaLogin();
 
         loginPage.preencherEmail(
-                dados.get("emailNaoCadastrado")
-                     .asText()
+                dados.get("emailNaoCadastrado").asText()
         );
 
         loginPage.preencherSenha(
-                dados.get("usuarioValido")
-                     .get("senha")
-                     .asText()
+                System.getenv("TEST_PASSWORD")
         );
 
         loginPage.clicarLogin();
@@ -133,34 +126,32 @@ public class LoginTest {
     }
 
     // Email não preenchido
-   // Email não preenchido
-@Test
-public void loginComEmailNaoPreenchido() {
+    @Test
+    public void loginComEmailNaoPreenchido() {
 
-    System.out.println(">>> INICIO DO TESTE - EMAIL OBRIGATORIO <<<");
+        System.out.println(">>> INICIO DO TESTE - EMAIL OBRIGATORIO <<<");
 
-    assertEquals(
-            driver.getTitle(),
-            "Automation Exercise"
-    );
+        assertEquals(
+                driver.getTitle(),
+                "Automation Exercise"
+        );
 
-    driver.findElement(
-            By.cssSelector("a[href='/login']")
-    ).click();
+        loginPage.acessarTelaLogin();
 
-    loginPage.preencherSenha(
-            dados.get("usuarioValido")
-                 .get("senha")
-                 .asText()
-    );
+        loginPage.preencherSenha(
+                System.getenv("TEST_PASSWORD")
+        );
 
-    loginPage.validarEmailObrigatorio();
-}
+        loginPage.validarEmailObrigatorio();
+    }
+
     @AfterMethod
     public void fecharNavegador() {
 
         System.out.println(">>> FECHANDO NAVEGADOR <<<");
 
-        driver.quit();
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }

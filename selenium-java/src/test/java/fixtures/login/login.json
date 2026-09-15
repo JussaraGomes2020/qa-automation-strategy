@@ -1,9 +1,5 @@
 {
-  "usuarioValido": {
-    "email": "jagqualityassurance+22@gmail.com",
-    "senha": "teste123"
-  },
   "senhaInvalida": "senha_invalida",
-  "emailNaoCadastrado": "emailnaonaocadastrado@gmail.com",
+  "emailNaoCadastrado": "emailnaocadastrado@gmail.com",
   "emailFormatoInvalido": "jagqualityassurancegmail.com"
 }

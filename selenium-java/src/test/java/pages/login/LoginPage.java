@@ -19,6 +19,9 @@ public class LoginPage {
     // Seletores
     // =========================
 
+    private By linkLogin =
+            By.cssSelector("a[href='/login']");
+
     private By campoEmail =
             By.cssSelector("[data-qa='login-email']");
 
@@ -44,6 +47,24 @@ public class LoginPage {
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
+    }
+
+    // =========================
+    // Navegação
+    // =========================
+
+    public void acessarTelaLogin() {
+
+        WebDriverWait wait = new WebDriverWait(
+                driver,
+                Duration.ofSeconds(10)
+        );
+
+        WebElement link = wait.until(
+                ExpectedConditions.elementToBeClickable(linkLogin)
+        );
+
+        link.click();
     }
 
     // =========================
