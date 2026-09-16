@@ -1,7 +1,8 @@
 package pages.login;
 
-import java.time.Duration;
+import static org.testng.Assert.assertEquals;
 
+import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -9,131 +10,99 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static org.testng.Assert.assertEquals;
-
 public class LoginPage {
 
-    private WebDriver driver;
+  private WebDriver driver;
 
-    // =========================
-    // Seletores
-    // =========================
+  // =========================
+  // Seletores
+  // =========================
 
-    private By linkLogin =
-            By.cssSelector("a[href='/login']");
+  private By linkLogin = By.cssSelector("a[href='/login']");
 
-    private By campoEmail =
-            By.cssSelector("[data-qa='login-email']");
+  private By campoEmail = By.cssSelector("[data-qa='login-email']");
 
-    private By campoSenha =
-            By.cssSelector("[data-qa='login-password']");
+  private By campoSenha = By.cssSelector("[data-qa='login-password']");
 
-    private By botaoLogin =
-            By.cssSelector("[data-qa='login-button']");
+  private By botaoLogin = By.cssSelector("[data-qa='login-button']");
 
-    private By botaoLogout =
-            By.cssSelector("a[href='/logout']");
+  private By botaoLogout = By.cssSelector("a[href='/logout']");
 
-    // =========================
-    // Mensagens
-    // =========================
+  // =========================
+  // Mensagens
+  // =========================
 
-    private By mensagemLoginInvalido =
-            By.cssSelector("p[style*='color: red']");
+  private By mensagemLoginInvalido = By.cssSelector("p[style*='color: red']");
 
-    // =========================
-    // Construtor
-    // =========================
+  // =========================
+  // Construtor
+  // =========================
 
-    public LoginPage(WebDriver driver) {
-        this.driver = driver;
-    }
+  public LoginPage(WebDriver driver) {
+    this.driver = driver;
+  }
 
-    // =========================
-    // Navegação
-    // =========================
+  // =========================
+  // Navegação
+  // =========================
 
-    public void acessarTelaLogin() {
+  public void acessarTelaLogin() {
 
-        WebDriverWait wait = new WebDriverWait(
-                driver,
-                Duration.ofSeconds(10)
-        );
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        WebElement link = wait.until(
-                ExpectedConditions.elementToBeClickable(linkLogin)
-        );
+    WebElement link = wait.until(ExpectedConditions.elementToBeClickable(linkLogin));
 
-        link.click();
-    }
+    link.click();
+  }
 
-    // =========================
-    // Ações
-    // =========================
+  // =========================
+  // Ações
+  // =========================
 
-    public void preencherEmail(String email) {
-        driver.findElement(campoEmail).sendKeys(email);
-    }
+  public void preencherEmail(String email) {
+    driver.findElement(campoEmail).sendKeys(email);
+  }
 
-    public void preencherSenha(String senha) {
-        driver.findElement(campoSenha).sendKeys(senha);
-    }
+  public void preencherSenha(String senha) {
+    driver.findElement(campoSenha).sendKeys(senha);
+  }
 
-    public void clicarLogin() {
+  public void clicarLogin() {
 
-        WebElement botao = driver.findElement(botaoLogin);
+    WebElement botao = driver.findElement(botaoLogin);
 
-        ((JavascriptExecutor) driver).executeScript(
-                "arguments[0].scrollIntoView({block: 'center'});",
-                botao
-        );
+    ((JavascriptExecutor) driver)
+        .executeScript("arguments[0].scrollIntoView({block: 'center'});", botao);
 
-        botao.click();
-    }
+    botao.click();
+  }
 
-    // =========================
-    // Validações - Login
-    // =========================
+  // =========================
+  // Validações - Login
+  // =========================
 
-    public void validarLoginRealizado() {
+  public void validarLoginRealizado() {
 
-        WebDriverWait wait = new WebDriverWait(
-                driver,
-                Duration.ofSeconds(10)
-        );
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        wait.until(
-                ExpectedConditions.visibilityOfElementLocated(
-                        botaoLogout
-                )
-        );
-    }
+    wait.until(ExpectedConditions.visibilityOfElementLocated(botaoLogout));
+  }
 
-    public void validarMensagemLoginInvalido() {
+  public void validarMensagemLoginInvalido() {
 
-        WebDriverWait wait = new WebDriverWait(
-                driver,
-                Duration.ofSeconds(10)
-        );
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        wait.until(
-                ExpectedConditions.visibilityOfElementLocated(
-                        mensagemLoginInvalido
-                )
-        );
-    }
+    wait.until(ExpectedConditions.visibilityOfElementLocated(mensagemLoginInvalido));
+  }
 
-    // =========================
-    // Validações - Campos obrigatórios
-    // =========================
+  // =========================
+  // Validações - Campos obrigatórios
+  // =========================
 
-    public void validarEmailObrigatorio() {
+  public void validarEmailObrigatorio() {
 
-        WebElement campo = driver.findElement(campoEmail);
+    WebElement campo = driver.findElement(campoEmail);
 
-        assertEquals(
-                campo.getDomAttribute("required"),
-                "true"
-        );
-    }
+    assertEquals(campo.getDomAttribute("required"), "true");
+  }
 }

@@ -7,17 +7,15 @@
   "scripts": {
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-
     "test": "cypress run",
     "test:web": "cypress run --spec \"cypress/e2e/**/*.feature\"",
     "test:api": "cypress run --spec \"cypress/api/**/*.cy.js\"",
-
     "test:cypress": "cypress run",
     "report:cypress": "start \"\" \".\\cypress\\reports\\index.html\"",
     "test:cypress:report": "cypress run && start \"\" \".\\cypress\\reports\\index.html\"",
-
     "test:playwright": "playwright test",
-    "report:playwright": "playwright show-report"
+    "report:playwright": "playwright show-report",
+    "format": "prettier --write \"cypress/**/*.{js,json}\" \"playwright/**/*.{js,ts,json}\""
   },
   "keywords": [
     "cypress",
@@ -42,6 +40,10 @@
     "mochawesome": "^8.0.1",
     "mochawesome-merge": "^5.1.1",
     "mochawesome-report-generator": "^6.3.2",
+    "prettier": "^3.9.7",
     "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2"
   }
 }

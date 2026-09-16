@@ -1,13 +1,11 @@
 import { URLS } from "../utils/constantes";
 
 class ProdutosPage {
-
   acessarTelaProdutos() {
     cy.visit(URLS.PRODUTOS);
   }
 
   adicionarProdutoAoCarrinho(produto) {
-
     cy.contains(".productinfo p", produto)
       .parents(".product-image-wrapper")
       .trigger("mouseover");
@@ -18,9 +16,7 @@ class ProdutosPage {
       .click();
 
     cy.contains("Continue Shopping").click();
-
   }
-
 }
 
 export default new ProdutosPage();

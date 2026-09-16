@@ -2,7 +2,7 @@
   "usuario": {
     "tratamento": "Mrs",
     "nome": "Jussara Gomes",
-    "email": "",
+    "email": "novo.email@example.com",
     "senha": "teste123",
 
     "dataNascimento": {
@@ -17,7 +17,7 @@
     "dadosPessoais": {
       "primeiroNome": "Jussara",
       "ultimoNome": "Gomes",
-      "empresa": "OpenAI"
+      "empresa": "JAG"
     },
 
     "endereco": {
@@ -28,6 +28,6 @@
       "cep": "0494260"
     },
 
-    "telefone": "11953849813"
+    "telefone": "1199999999"
   }
 }

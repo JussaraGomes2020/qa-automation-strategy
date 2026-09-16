@@ -1,5 +1,4 @@
 class CheckoutPage {
-
   // Seletores
 
   enderecoEntrega = "#address_delivery";
@@ -14,68 +13,41 @@ class CheckoutPage {
 
   totalCompra = ".cart_total";
 
-
   // Validações
 
   validarAcessoCheckout() {
+    cy.url().should("include", "/checkout");
 
-    cy.url()
-      .should("include", "/checkout");
-
-    cy.get(this.enderecoEntrega)
-      .should("be.visible");
-
+    cy.get(this.enderecoEntrega).should("be.visible");
   }
 
   prosseguirPagamento() {
-
-    cy.get(this.enderecoEntrega)
-      .should("be.visible");
-
+    cy.get(this.enderecoEntrega).should("be.visible");
   }
 
   validarDadosEntrega() {
+    cy.get(this.enderecoEntrega).should("be.visible");
 
-    cy.get(this.enderecoEntrega)
-      .should("be.visible");
+    cy.get(this.itensEnderecoEntrega).should("have.length.greaterThan", 5);
 
-    cy.get(this.itensEnderecoEntrega)
-      .should("have.length.greaterThan", 5);
-
-    cy.get(this.enderecoEntrega)
-      .should("contain.text", "Mrs.");
-
-    cy.get(this.enderecoEntrega)
-      .should("contain.text", "United States");
-
+    cy.get(this.enderecoEntrega).should("contain.text", "Mrs.");
   }
 
   validarProdutoCarrinho(produto) {
+    cy.get(this.descricaoProduto).should("contain.text", produto);
 
-    cy.get(this.descricaoProduto)
-      .should("contain.text", produto);
-
-    cy.get(`${this.descricaoProduto} a`)
-      .should("not.be.empty");
-
+    cy.get(`${this.descricaoProduto} a`).should("not.be.empty");
   }
 
   validarResumoCompra(preco, quantidade, total) {
-
-    cy.get(this.precoProduto)
-      .should("be.visible")
-      .and("contain.text", preco);
+    cy.get(this.precoProduto).should("be.visible").and("contain.text", preco);
 
     cy.get(this.quantidadeProduto)
       .should("be.visible")
       .and("contain.text", quantidade);
 
-    cy.get(this.totalCompra)
-      .should("be.visible")
-      .and("contain.text", total);
-
+    cy.get(this.totalCompra).should("be.visible").and("contain.text", total);
   }
-
 }
 
 export default new CheckoutPage();

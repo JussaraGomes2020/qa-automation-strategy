@@ -1,38 +1,37 @@
-import { test, expect } from '@playwright/test';
-import { gerarEmail } from '../../fixtures/data/UsuarioFactory';
+import { test, expect } from "@playwright/test";
+import { gerarEmail } from "../../fixtures/data/UsuarioFactory";
 
-test.describe('API - Atualizar Usuário', () => {
-
-  test('API 13 - deve atualizar os dados de uma conta de usuário', async ({ request }) => {
-
+test.describe("API - Atualizar Usuário", () => {
+  test("API 13 - deve atualizar os dados de uma conta de usuário", async ({
+    request,
+  }) => {
     const email = gerarEmail();
-    const senha = 'Senha@123';
+    const senha = "Senha@123";
 
     try {
-
       // 1. Criar usuário para pré-condição
       const createResponse = await request.post(
-        'https://automationexercise.com/api/createAccount',
+        "https://automationexercise.com/api/createAccount",
         {
           form: {
-            name: 'QA Automation',
+            name: "QA Automation",
             email,
             password: senha,
-            title: 'Sr.',
-            birth_date: '01',
-            birth_month: '01',
-            birth_year: '1990',
-            firstname: 'QA',
-            lastname: 'Automation',
-            company: 'QA Company',
-            address1: 'Rua Teste, 100',
-            address2: '',
-            country: 'Canada',
-            zipcode: '01000-000',
-            state: 'SP',
-            city: 'Sao Paulo',
-            mobile_number: '11999999999'
-          }
+            title: "Sr.",
+            birth_date: "01",
+            birth_month: "01",
+            birth_year: "1990",
+            firstname: "QA",
+            lastname: "Automation",
+            company: "QA Company",
+            address1: "Rua Teste, 100",
+            address2: "",
+            country: "Canada",
+            zipcode: "01000-000",
+            state: "SP",
+            city: "Sao Paulo",
+            mobile_number: "11999999999",
+          },
         }
       );
 
@@ -41,32 +40,31 @@ test.describe('API - Atualizar Usuário', () => {
       const createBody = await createResponse.json();
 
       expect(createBody.responseCode).toBe(201);
-      expect(createBody.message).toBe('User created!');
-
+      expect(createBody.message).toBe("User created!");
 
       // 2. Atualizar usuário
       const updateResponse = await request.put(
-        'https://automationexercise.com/api/updateAccount',
+        "https://automationexercise.com/api/updateAccount",
         {
           form: {
-            name: 'QA Automation Atualizado',
+            name: "QA Automation Atualizado",
             email,
             password: senha,
-            title: 'Sr.',
-            birth_date: '02',
-            birth_month: '02',
-            birth_year: '1991',
-            firstname: 'QA Atualizado',
-            lastname: 'Automation',
-            company: 'QA Company Updated',
-            address1: 'Rua Atualizada, 200',
-            address2: '',
-            country: 'Canada',
-            zipcode: '02000-000',
-            state: 'SP',
-            city: 'Sao Paulo',
-            mobile_number: '11888888888'
-          }
+            title: "Sr.",
+            birth_date: "02",
+            birth_month: "02",
+            birth_year: "1991",
+            firstname: "QA Atualizado",
+            lastname: "Automation",
+            company: "QA Company Updated",
+            address1: "Rua Atualizada, 200",
+            address2: "",
+            country: "Canada",
+            zipcode: "02000-000",
+            state: "SP",
+            city: "Sao Paulo",
+            mobile_number: "11888888888",
+          },
         }
       );
 
@@ -75,16 +73,15 @@ test.describe('API - Atualizar Usuário', () => {
       const updateBody = await updateResponse.json();
 
       expect(updateBody.responseCode).toBe(200);
-      expect(updateBody.message).toBe('User updated!');
-
+      expect(updateBody.message).toBe("User updated!");
 
       // 3. Consultar usuário e validar a persistência da atualização
       const getResponse = await request.get(
-        'https://automationexercise.com/api/getUserDetailByEmail',
+        "https://automationexercise.com/api/getUserDetailByEmail",
         {
           params: {
-            email
-          }
+            email,
+          },
         }
       );
 
@@ -94,25 +91,22 @@ test.describe('API - Atualizar Usuário', () => {
 
       expect(getBody.responseCode).toBe(200);
 
-      expect(getBody.user.name).toBe('QA Automation Atualizado');
+      expect(getBody.user.name).toBe("QA Automation Atualizado");
       expect(getBody.user.email).toBe(email);
-      expect(getBody.user.first_name).toBe('QA Atualizado');
-      expect(getBody.user.last_name).toBe('Automation');
-      expect(getBody.user.company).toBe('QA Company Updated');
-      expect(getBody.user.address1).toBe('Rua Atualizada, 200');
-      expect(getBody.user.zipcode).toBe('02000-000');
-
-
+      expect(getBody.user.first_name).toBe("QA Atualizado");
+      expect(getBody.user.last_name).toBe("Automation");
+      expect(getBody.user.company).toBe("QA Company Updated");
+      expect(getBody.user.address1).toBe("Rua Atualizada, 200");
+      expect(getBody.user.zipcode).toBe("02000-000");
     } finally {
-
       // 4. Excluir usuário criado para o teste
       const deleteResponse = await request.delete(
-        'https://automationexercise.com/api/deleteAccount',
+        "https://automationexercise.com/api/deleteAccount",
         {
           form: {
             email,
-            password: senha
-          }
+            password: senha,
+          },
         }
       );
 
@@ -121,9 +115,7 @@ test.describe('API - Atualizar Usuário', () => {
       const deleteBody = await deleteResponse.json();
 
       expect(deleteBody.responseCode).toBe(200);
-      expect(deleteBody.message).toBe('Account deleted!');
+      expect(deleteBody.message).toBe("Account deleted!");
     }
-
   });
-
 });

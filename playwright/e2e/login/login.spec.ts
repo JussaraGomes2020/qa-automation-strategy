@@ -1,9 +1,8 @@
-import { test } from '@playwright/test';
-import LoginPage from '../../pages/LoginPage';
-import loginData from '../../fixtures/login/login.json';
+import { test } from "@playwright/test";
+import LoginPage from "../../pages/LoginPage";
+import loginData from "../../fixtures/login/login.json";
 
-test.describe('Login', () => {
-
+test.describe("Login", () => {
   let loginPage: LoginPage;
 
   test.beforeEach(async ({ page }) => {
@@ -16,15 +15,10 @@ test.describe('Login', () => {
   // Login realizado com sucesso
   // =========================
 
-  test('Login realizado com sucesso', async () => {
+  test("Login realizado com sucesso", async () => {
+    await loginPage.informarEmail(process.env.TEST_EMAIL!);
 
-    await loginPage.informarEmail(
-      loginData.usuarioValido.email
-    );
-
-    await loginPage.informarSenha(
-      loginData.usuarioValido.senha
-    );
+    await loginPage.informarSenha(process.env.TEST_PASSWORD!);
 
     await loginPage.clicarBotaoLogin();
 
@@ -37,15 +31,10 @@ test.describe('Login', () => {
   // Login com senha inválida
   // =========================
 
-  test('Login com senha inválida', async () => {
+  test("Login com senha inválida", async () => {
+    await loginPage.informarEmail(process.env.TEST_EMAIL!);
 
-    await loginPage.informarEmail(
-      loginData.usuarioValido.email
-    );
-
-    await loginPage.informarSenha(
-      loginData.senhaInvalida
-    );
+    await loginPage.informarSenha(loginData.senhaInvalida);
 
     await loginPage.clicarBotaoLogin();
 
@@ -58,15 +47,10 @@ test.describe('Login', () => {
   // Login com e-mail não cadastrado
   // =========================
 
-  test('Login com e-mail não cadastrado', async () => {
+  test("Login com e-mail não cadastrado", async () => {
+    await loginPage.informarEmail(loginData.emailNaoCadastrado);
 
-    await loginPage.informarEmail(
-      loginData.emailNaoCadastrado
-    );
-
-    await loginPage.informarSenha(
-      loginData.usuarioValido.senha
-    );
+    await loginPage.informarSenha(process.env.TEST_PASSWORD!);
 
     await loginPage.clicarBotaoLogin();
 
@@ -79,13 +63,10 @@ test.describe('Login', () => {
   // Login sem informar o e-mail
   // =========================
 
-  test('Login sem informar o e-mail', async () => {
-
+  test("Login sem informar o e-mail", async () => {
     await loginPage.limparEmail();
 
-    await loginPage.informarSenha(
-      loginData.usuarioValido.senha
-    );
+    await loginPage.informarSenha(process.env.TEST_PASSWORD!);
 
     await loginPage.clicarBotaoLogin();
 
@@ -98,11 +79,8 @@ test.describe('Login', () => {
   // Login sem informar a senha
   // =========================
 
-  test('Login sem informar a senha', async () => {
-
-    await loginPage.informarEmail(
-      loginData.usuarioValido.email
-    );
+  test("Login sem informar a senha", async () => {
+    await loginPage.informarEmail(process.env.TEST_EMAIL!);
 
     await loginPage.limparSenha();
 
@@ -119,15 +97,10 @@ test.describe('Login', () => {
   // Login com e-mail em formato inválido
   // =========================
 
-  test('Login com e-mail em formato inválido', async () => {
+  test("Login com e-mail em formato inválido", async () => {
+    await loginPage.informarEmail(loginData.emailFormatoInvalido);
 
-    await loginPage.informarEmail(
-      loginData.emailFormatoInvalido
-    );
-
-    await loginPage.informarSenha(
-      loginData.usuarioValido.senha
-    );
+    await loginPage.informarSenha(process.env.TEST_PASSWORD!);
 
     await loginPage.clicarBotaoLogin();
 
@@ -142,11 +115,10 @@ test.describe('Login', () => {
   // Logout do usuário autenticado
   // =========================
 
-  test('Logout do usuário autenticado', async () => {
-
+  test("Logout do usuário autenticado", async () => {
     await loginPage.realizarLogin(
-      loginData.usuarioValido.email,
-      loginData.usuarioValido.senha
+      process.env.TEST_EMAIL!,
+      process.env.TEST_PASSWORD!
     );
 
     await loginPage.validarLoginRealizado();
@@ -157,5 +129,4 @@ test.describe('Login', () => {
 
     await loginPage.validarPaginaLogin();
   });
-
 });

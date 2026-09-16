@@ -1,4 +1,4 @@
-import { expect, Locator, Page } from '@playwright/test';
+import { expect, Locator, Page } from "@playwright/test";
 
 class LoginPage {
   readonly page: Page;
@@ -29,14 +29,12 @@ class LoginPage {
 
     this.botaoLogin = page.locator('[data-qa="login-button"]');
     this.botaoLogout = page.locator('a[href="/logout"]');
-    this.botaoExcluirConta = page.locator(
-      'a[href="/delete_account"]'
-    );
+    this.botaoExcluirConta = page.locator('a[href="/delete_account"]');
 
-    this.mensagemUsuarioLogado = page.getByText('Logged in as');
+    this.mensagemUsuarioLogado = page.getByText("Logged in as");
 
     this.mensagemLoginInvalido = page.getByText(
-      'Your email or password is incorrect!'
+      "Your email or password is incorrect!"
     );
   }
 
@@ -45,7 +43,7 @@ class LoginPage {
   // =========================
 
   async acessarTelaLogin(): Promise<void> {
-    await this.page.goto('/login');
+    await this.page.goto("/login");
   }
 
   // =========================
@@ -76,10 +74,7 @@ class LoginPage {
     await this.botaoLogout.click();
   }
 
-  async realizarLogin(
-    email: string,
-    senha: string
-  ): Promise<void> {
+  async realizarLogin(email: string, senha: string): Promise<void> {
     await this.acessarTelaLogin();
     await this.informarEmail(email);
     await this.informarSenha(senha);
@@ -105,9 +100,7 @@ class LoginPage {
   }
 
   async validarMensagemLoginInvalido(): Promise<void> {
-    await expect(
-      this.mensagemLoginInvalido
-    ).toBeVisible();
+    await expect(this.mensagemLoginInvalido).toBeVisible();
   }
 
   // =========================
@@ -115,13 +108,11 @@ class LoginPage {
   // =========================
 
   async validarEmailObrigatorio(): Promise<void> {
-    await expect(this.campoEmail)
-      .toHaveAttribute('required', '');
+    await expect(this.campoEmail).toHaveAttribute("required", "");
   }
 
   async validarSenhaObrigatoria(): Promise<void> {
-    await expect(this.campoSenha)
-      .toHaveAttribute('required', '');
+    await expect(this.campoSenha).toHaveAttribute("required", "");
   }
 
   async validarMensagemCampoObrigatorio(): Promise<void> {
@@ -155,9 +146,7 @@ class LoginPage {
 
     expect(mensagemAtual).toBeTruthy();
 
-    expect(mensagemAtual).toContain(
-      'jagqualityassurancegmail.com'
-    );
+    expect(mensagemAtual).toContain("missing an '@'");
   }
 
   // =========================

@@ -1,8 +1,4 @@
-import {
-  Given,
-  When,
-  Then,
-} from "@badeball/cypress-cucumber-preprocessor";
+import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 
 import LoginPage from "../../pages/LoginPage";
 
@@ -14,7 +10,6 @@ beforeEach(() => {
   });
 });
 
-
 // =========================
 // Given
 // =========================
@@ -25,20 +20,19 @@ Given("que acesso a página de login", () => {
 
 Given("que estou autenticado", () => {
   LoginPage.realizarLogin(
-    loginData.usuarioValido.email,
-    loginData.usuarioValido.senha
+    Cypress.env("TEST_EMAIL"),
+    Cypress.env("TEST_PASSWORD")
   );
 
   LoginPage.validarLoginRealizado();
 });
-
 
 // =========================
 // When
 // =========================
 
 When("preencho o campo email com um usuário válido", () => {
-  LoginPage.informarEmail(loginData.usuarioValido.email);
+  LoginPage.informarEmail(Cypress.env("TEST_EMAIL"));
 });
 
 When("preencho o campo email com um e-mail não cadastrado", () => {
@@ -50,7 +44,7 @@ When("preencho o campo email com um formato inválido", () => {
 });
 
 When("preencho o campo senha com uma senha válida", () => {
-  LoginPage.informarSenha(loginData.usuarioValido.senha);
+  LoginPage.informarSenha(Cypress.env("TEST_PASSWORD"));
 });
 
 When("preencho o campo senha com uma senha inválida", () => {
@@ -73,7 +67,6 @@ When("clico em sair", () => {
   LoginPage.clicarLogout();
 });
 
-
 // =========================
 // Then - Login
 // =========================
@@ -90,40 +83,29 @@ Then("o sistema deverá impedir o acesso", () => {
   LoginPage.validarAcessoNegado();
 });
 
-Then(
-  "deverá exibir a mensagem Seu e-mail ou senha estão incorretos!",
-  () => {
-    LoginPage.validarMensagemLoginInvalido();
-  }
-);
-
+Then("deverá exibir a mensagem Seu e-mail ou senha estão incorretos!", () => {
+  LoginPage.validarMensagemLoginInvalido();
+});
 
 // =========================
 // Then - Campos obrigatórios
 // =========================
 
-Then(
-  "o sistema deverá identificar o campo email como obrigatório",
-  () => {
-    LoginPage.validarEmailObrigatorio();
-  }
-);
+Then("o sistema deverá identificar o campo email como obrigatório", () => {
+  LoginPage.validarEmailObrigatorio();
+});
 
 Then("o acesso não deverá ser realizado", () => {
   LoginPage.validarFormularioNaoEnviado();
 });
 
-Then(
-  "o sistema deverá identificar o campo senha como obrigatório",
-  () => {
-    LoginPage.validarSenhaObrigatoria();
-  }
-);
+Then("o sistema deverá identificar o campo senha como obrigatório", () => {
+  LoginPage.validarSenhaObrigatoria();
+});
 
 Then("o campo senha deverá indicar que é obrigatório", () => {
   LoginPage.validarCampoSenhaObrigatorio();
 });
-
 
 // =========================
 // Then - Validação de e-mail
@@ -140,7 +122,6 @@ Then("o campo email deverá ser identificado como inválido", () => {
 Then("o campo email deverá rejeitar o formato informado", () => {
   LoginPage.validarCampoEmailInvalido();
 });
-
 
 // =========================
 // Then - Logout

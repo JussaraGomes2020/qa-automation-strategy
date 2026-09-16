@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
@@ -13,7 +14,7 @@ export default defineConfig({
   // Retry apenas no CI
   retries: process.env.CI ? 1 : 0,
 
-  // 1 worker no CI; 3 workers localmente
+  // 1 worker no CI; 1 worker localmente
   workers: process.env.CI ? 1 : 1,
 
   // Diretório das evidências

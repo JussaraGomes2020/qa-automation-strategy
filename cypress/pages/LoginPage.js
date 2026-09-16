@@ -1,169 +1,143 @@
 import BasePage from "./BasePage";
 
 class LoginPage extends BasePage {
+  // =========================
+  // Seletores
+  // =========================
 
-    // =========================
-    // Seletores
-    // =========================
+  campoEmail = '[data-qa="login-email"]';
+  campoSenha = '[data-qa="login-password"]';
 
-    campoEmail = '[data-qa="login-email"]';
-    campoSenha = '[data-qa="login-password"]';
+  botaoLogin = '[data-qa="login-button"]';
+  botaoLogout = 'a[href="/logout"]';
+  botaoExcluirConta = 'a[href="/delete_account"]';
 
-    botaoLogin = '[data-qa="login-button"]';
-    botaoLogout = 'a[href="/logout"]';
-    botaoExcluirConta = 'a[href="/delete_account"]';
+  // =========================
+  // Mensagens
+  // =========================
 
+  mensagemUsuarioLogado = "Logged in as";
+  mensagemLoginInvalido = "Your email or password is incorrect!";
 
-    // =========================
-    // Mensagens
-    // =========================
+  // =========================
+  // Navegação
+  // =========================
 
-    mensagemUsuarioLogado = "Logged in as";
-    mensagemLoginInvalido = "Your email or password is incorrect!";
+  acessarTelaLogin() {
+    this.acessarPagina("/login");
+  }
 
+  // =========================
+  // Ações
+  // =========================
 
-    // =========================
-    // Navegação
-    // =========================
+  informarEmail(email) {
+    this.preencherCampo(this.campoEmail, email);
+  }
 
-    acessarTelaLogin() {
-        this.acessarPagina("/login");
-    }
+  informarSenha(senha) {
+    this.preencherCampo(this.campoSenha, senha);
+  }
 
+  limparEmail() {
+    cy.get(this.campoEmail).clear();
+  }
 
-    // =========================
-    // Ações
-    // =========================
+  limparSenha() {
+    cy.get(this.campoSenha).clear();
+  }
 
-    informarEmail(email) {
-        this.preencherCampo(this.campoEmail, email);
-    }
+  clicarBotaoLogin() {
+    this.clicar(this.botaoLogin);
+  }
 
-    informarSenha(senha) {
-        this.preencherCampo(this.campoSenha, senha);
-    }
+  clicarLogout() {
+    this.clicar(this.botaoLogout);
+  }
 
-    limparEmail() {
-        cy.get(this.campoEmail)
-            .clear();
-    }
+  realizarLogin(email, senha) {
+    this.acessarTelaLogin();
+    this.informarEmail(email);
+    this.informarSenha(senha);
+    this.clicarBotaoLogin();
+  }
 
-    limparSenha() {
-        cy.get(this.campoSenha)
-            .clear();
-    }
+  // =========================
+  // Validações - Login
+  // =========================
 
-    clicarBotaoLogin() {
-        this.clicar(this.botaoLogin);
-    }
+  validarLoginRealizado() {
+    this.validarElementoVisivel(this.botaoLogout);
+    this.validarElementoVisivel(this.botaoExcluirConta);
+  }
 
-    clicarLogout() {
-        this.clicar(this.botaoLogout);
-    }
+  validarUsuarioAutenticado() {
+    this.validarTextoVisivel(this.mensagemUsuarioLogado);
+  }
 
-    realizarLogin(email, senha) {
-        this.acessarTelaLogin();
-        this.informarEmail(email);
-        this.informarSenha(senha);
-        this.clicarBotaoLogin();
-    }
+  validarAcessoNegado() {
+    cy.url().should("include", "/login");
 
+    cy.get(this.botaoLogin).should("be.visible");
+  }
 
-    // =========================
-    // Validações - Login
-    // =========================
+  validarMensagemLoginInvalido() {
+    cy.contains(this.mensagemLoginInvalido).should("be.visible");
+  }
 
-    validarLoginRealizado() {
-        this.validarElementoVisivel(this.botaoLogout);
-        this.validarElementoVisivel(this.botaoExcluirConta);
-    }
+  // =========================
+  // Validações - Campos obrigatórios
+  // =========================
 
-    validarUsuarioAutenticado() {
-        this.validarTextoVisivel(this.mensagemUsuarioLogado);
-    }
+  validarEmailObrigatorio() {
+    cy.get(this.campoEmail).should("have.attr", "required");
+  }
 
-    validarAcessoNegado() {
-        cy.url()
-            .should("include", "/login");
+  validarSenhaObrigatoria() {
+    cy.get(this.campoSenha).should("have.attr", "required");
+  }
 
-        cy.get(this.botaoLogin)
-            .should("be.visible");
-    }
+  validarCampoSenhaObrigatorio() {
+    cy.get(this.campoSenha).then(($campo) => {
+      expect($campo[0].validity.valueMissing).to.be.true;
+    });
+  }
 
-    validarMensagemLoginInvalido() {
-        cy.contains(this.mensagemLoginInvalido)
-            .should("be.visible");
-    }
+  validarFormularioNaoEnviado() {
+    cy.url().should("include", "/login");
+  }
 
+  // =========================
+  // Validações - E-mail
+  // =========================
 
-    // =========================
-    // Validações - Campos obrigatórios
-    // =========================
+  validarEmailInvalido() {
+    cy.get(this.campoEmail).then(($campo) => {
+      expect($campo[0].validity.valid).to.be.false;
+    });
+  }
 
-    validarEmailObrigatorio() {
-        cy.get(this.campoEmail)
-            .should("have.attr", "required");
-    }
+  validarCampoEmailInvalido() {
+    cy.get(this.campoEmail).then(($campo) => {
+      expect($campo[0].validity.typeMismatch).to.be.true;
+    });
+  }
 
-    validarSenhaObrigatoria() {
-        cy.get(this.campoSenha)
-            .should("have.attr", "required");
-    }
+  // =========================
+  // Validações - Logout
+  // =========================
 
-    validarCampoSenhaObrigatorio() {
-        cy.get(this.campoSenha)
-            .then(($campo) => {
-                expect($campo[0].validity.valueMissing)
-                    .to.be.true;
-            });
-    }
+  validarLogout() {
+    cy.get(this.botaoLogout).should("not.exist");
 
-    validarFormularioNaoEnviado() {
-        cy.url()
-            .should("include", "/login");
-    }
+    cy.get(this.botaoExcluirConta).should("not.exist");
+  }
 
+  validarPaginaLogin() {
+    cy.url().should("include", "/login");
 
-    // =========================
-    // Validações - E-mail
-    // =========================
-
-    validarEmailInvalido() {
-        cy.get(this.campoEmail)
-            .then(($campo) => {
-                expect($campo[0].validity.valid)
-                    .to.be.false;
-            });
-    }
-
-    validarCampoEmailInvalido() {
-        cy.get(this.campoEmail)
-            .then(($campo) => {
-                expect($campo[0].validity.typeMismatch)
-                    .to.be.true;
-            });
-    }
-
-
-    // =========================
-    // Validações - Logout
-    // =========================
-
-    validarLogout() {
-        cy.get(this.botaoLogout)
-            .should("not.exist");
-
-        cy.get(this.botaoExcluirConta)
-            .should("not.exist");
-    }
-
-    validarPaginaLogin() {
-        cy.url()
-            .should("include", "/login");
-
-        cy.get(this.botaoLogin)
-            .should("be.visible");
-    }
+    cy.get(this.botaoLogin).should("be.visible");
+  }
 }
 
 export default new LoginPage();

@@ -1,5 +1,5 @@
 {
   "senhaInvalida": "senha_invalida",
-  "emailNaoCadastrado": "emailnaocadastrado@gmail.com",
-  "emailFormatoInvalido": "jagqualityassurancegmail.com"
+  "emailNaoCadastrado": "usuario.nao.cadastrado@example.com",
+  "emailFormatoInvalido": "email.invalido@example.com"
 }

@@ -1,3 +1,3 @@
 export const gerarEmail = () => {
-  return `jussara${Date.now()}@teste.com`;
+  return `jussara${Date.now()}@example.com`;
 };

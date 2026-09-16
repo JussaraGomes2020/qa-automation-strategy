@@ -1,7 +1,6 @@
-import { expect } from '@playwright/test';
+import { expect } from "@playwright/test";
 
 class Cadastro_UsuarioPage {
-
   constructor(page) {
     this.page = page;
 
@@ -13,8 +12,8 @@ class Cadastro_UsuarioPage {
     this.campoEmailCadastro = page.locator('[data-qa="signup-email"]');
     this.botaoSignup = page.locator('[data-qa="signup-button"]');
 
-    this.radioMr = page.locator('#id_gender1');
-    this.radioMrs = page.locator('#id_gender2');
+    this.radioMr = page.locator("#id_gender1");
+    this.radioMrs = page.locator("#id_gender2");
 
     this.campoNome = page.locator('[data-qa="name"]');
     this.campoEmail = page.locator('[data-qa="email"]');
@@ -24,8 +23,8 @@ class Cadastro_UsuarioPage {
     this.comboMes = page.locator('[data-qa="months"]');
     this.comboAno = page.locator('[data-qa="years"]');
 
-    this.checkNewsletter = page.locator('#newsletter');
-    this.checkOfertas = page.locator('#optin');
+    this.checkNewsletter = page.locator("#newsletter");
+    this.checkOfertas = page.locator("#optin");
 
     this.campoPrimeiroNome = page.locator('[data-qa="first_name"]');
     this.campoUltimoNome = page.locator('[data-qa="last_name"]');
@@ -43,19 +42,19 @@ class Cadastro_UsuarioPage {
 
     // Mensagens
 
-    this.tituloTelaCadastro = page.getByText('Enter Account Information');
+    this.tituloTelaCadastro = page.getByText("Enter Account Information");
 
-    this.mensagemContaCriada = page.getByText('Account Created!');
+    this.mensagemContaCriada = page.getByText("Account Created!");
 
     this.mensagemSucessoCadastro = page.getByText(
-      'Congratulations! Your new account has been successfully created!'
+      "Congratulations! Your new account has been successfully created!"
     );
   }
 
   // Navegação
 
   async acessarTelaCadastro() {
-    await this.page.goto('/login');
+    await this.page.goto("/login");
   }
 
   async clicarMenuLogin() {
@@ -84,10 +83,9 @@ class Cadastro_UsuarioPage {
   // Dados da conta
 
   async selecionarTratamento(tratamento) {
-
     const tratamentos = {
       Mr: this.radioMr,
-      Mrs: this.radioMrs
+      Mrs: this.radioMrs,
     };
 
     await tratamentos[tratamento].check();
@@ -106,8 +104,7 @@ class Cadastro_UsuarioPage {
   }
 
   async informarDataNascimento(data) {
-
-    const [dia, mes, ano] = data.split('/');
+    const [dia, mes, ano] = data.split("/");
 
     await this.comboDia.selectOption(dia);
     await this.comboMes.selectOption(String(Number(mes) - 1));
@@ -115,21 +112,18 @@ class Cadastro_UsuarioPage {
   }
 
   async marcarNewsletter(receberNewsletter) {
-
     if (receberNewsletter) {
       await this.checkNewsletter.check();
     }
   }
 
   async marcarOfertasEspeciais(receberOfertas) {
-
     if (receberOfertas) {
       await this.checkOfertas.check();
     }
   }
 
   async informarDadosPessoais(dados) {
-
     await this.campoPrimeiroNome.fill(dados.primeiroNome);
 
     await this.campoUltimoNome.fill(dados.ultimoNome);
@@ -138,7 +132,6 @@ class Cadastro_UsuarioPage {
   }
 
   async informarEndereco(endereco) {
-
     await this.campoEndereco.fill(endereco.logradouro);
 
     await this.comboPais.selectOption(endereco.pais);
@@ -161,17 +154,15 @@ class Cadastro_UsuarioPage {
   // Validações
 
   async validarTelaLoginCadastro() {
-
     await expect(this.page).toHaveURL(/\/login/);
 
-    await expect(this.page.locator('.login-form')).toBeVisible();
-    await expect(this.page.locator('.signup-form')).toBeVisible();
+    await expect(this.page.locator(".login-form")).toBeVisible();
+    await expect(this.page.locator(".signup-form")).toBeVisible();
     await expect(this.campoNomeCadastro).toBeVisible();
     await expect(this.campoEmailCadastro).toBeVisible();
   }
 
   async validarTelaCriacaoConta() {
-
     await expect(this.page).toHaveURL(/\/signup/);
 
     await expect(this.tituloTelaCadastro).toBeVisible();
@@ -179,7 +170,6 @@ class Cadastro_UsuarioPage {
   }
 
   async validarContaCriada() {
-
     await expect(this.page).toHaveURL(/\/account_created/);
 
     await expect(this.mensagemContaCriada).toBeVisible();

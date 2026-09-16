@@ -1,8 +1,4 @@
-import {
-  Given,
-  When,
-  Then,
-} from "@badeball/cypress-cucumber-preprocessor";
+import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 
 import ProdutosPage from "../../pages/ProdutosPage";
 import CarrinhoPage from "../../pages/CarrinhoPage";
