@@ -31,4 +31,7 @@ jobs:
 
       - name: Executar testes Selenium
         working-directory: selenium-java
+        env:
+          TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
+          TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
         run: mvn test
