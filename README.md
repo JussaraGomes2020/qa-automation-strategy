@@ -341,6 +341,7 @@ relatórios;
 rastreabilidade;
 reprodução local;
 comportamento no CI.
+
 9. Critérios de análise
 
 Os frameworks foram avaliados considerando:
@@ -358,25 +359,45 @@ Padronização de código	  ✓	           ✓	        ✓
 
 A análise deve ser interpretada considerando o contexto de utilização e as características observadas durante a implementação.
 
+### 9.1 Validação em CI
+
+Os três frameworks foram integrados ao GitHub Actions:
+
+- Cypress
+- Playwright
+- Selenium + Java
+
+Durante a validação foi identificada uma dependência de configuração de ambiente relacionada às credenciais utilizadas nos testes.
+
+A correção adotada foi:
+
+- utilização de variáveis de ambiente;
+- armazenamento das credenciais em GitHub Secrets;
+- injeção das variáveis nos respectivos workflows.
+
+Após a configuração, os três workflows foram executados com sucesso no GitHub Actions.
+
+A experiência demonstrou que a integração da automação ao CI/CD deve considerar não apenas a execução do código de teste, mas também a configuração do ambiente e o gerenciamento dos dados necessários à execução.
+
 10. Conclusão
 
-A construção da POC demonstrou que a escolha de uma solução de automação não depende exclusivamente das funcionalidades oferecidas pelo framework.
+A construção da POC demonstrou, por meio de uma implementação prática, que a escolha de uma solução de automação não depende exclusivamente das funcionalidades oferecidas pelo framework.
 
-Também devem ser considerados:
+A decisão deve considerar diferentes aspectos do contexto técnico e do projeto, incluindo:
 
 perfil técnico do time;
 público consumidor dos testes;
-arquitetura;
+arquitetura da solução;
 facilidade de manutenção;
 estratégia de dados;
 infraestrutura;
 navegadores e drivers;
 CI/CD;
 paralelismo;
-evidências;
+evidências e diagnósticos;
 requisitos do projeto.
 
-A POC utiliza uma abordagem baseada em evidências práticas para apoiar futuras decisões de estratégia de automação.
+A POC utiliza uma abordagem baseada em evidências práticas, permitindo observar diferenças, limitações e necessidades de cada abordagem e fornecendo subsídios para futuras decisões relacionadas à estratégia de automação.
 
 11. Uso de IA
 
