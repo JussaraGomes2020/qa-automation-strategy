@@ -40,6 +40,13 @@ async function setupNodeEvents(on, config) {
 module.exports = defineConfig({
   defaultBrowser: "chrome",
 
+  // Variáveis de ambiente
+  env: {
+    TEST_EMAIL: process.env.TEST_EMAIL,
+    TEST_PASSWORD: process.env.TEST_PASSWORD,
+  },
+
+  // Relatórios
   reporter: "cypress-mochawesome-reporter",
 
   reporterOptions: {
@@ -52,9 +59,11 @@ module.exports = defineConfig({
     saveAllAttempts: false,
   },
 
+  // Evidências
   video: true,
   screenshotOnRunFailure: true,
 
+  // Configurações de execução
   e2e: {
     baseUrl: "https://automationexercise.com",
 
@@ -69,3 +78,4 @@ module.exports = defineConfig({
     setupNodeEvents,
   },
 });
+
